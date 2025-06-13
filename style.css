@@ -8,14 +8,19 @@
     font-family: "Lato", sans-serif;
 }
 
+
 :root {
-  --primary-color: rgb(11, 173, 79);
-  --accent-color: #e0eaff;
-  --highlight-color: #054f79;
+  --primary-color: #054f79;
+  --accent-color: #99b7f8;
+  --highlight-color: #867bff;
+}
+
+.highlight {
+    color: var(--accent-color);
 }
 
 h1 {
-    font-size: 28px;
+    font-size: 48px;
 }
 
 
@@ -29,7 +34,7 @@ a {
 }
 
 .container {
-    padding: 12px 96px;
+    padding: 12px 24px;
 }
 
 .row {
@@ -55,10 +60,17 @@ NAVIGATION
 
 */ 
 
+
+
 .logo__img {
     width: 60px;
     height: 60px;
     border-radius: 50px;
+}
+
+.nav__container {
+    width: 100%;
+    background-color: #dff2fc
 }
 
 nav {
@@ -69,7 +81,7 @@ nav {
     align-items: center;
     margin: 0 auto;
     border-radius: 5px;
-    padding: 6px 12px;
+    padding: 6px 16px;
 }
 
 .nav__links {
@@ -80,10 +92,11 @@ nav {
     padding-left: 24px;
     display: flex;
     align-items: center;
+    font-size: 18px;
 }
 
-.link__primary {
-    
+.link__primary:hover .btn {
+    background-color: #0e87cd;
 }
 
 /* 
@@ -92,6 +105,9 @@ SEARCH SECTION
 
 */ 
 
+.landing-page .search__wrapper {
+}
+
 .search__wrapper {
     width: 100%;
     display: flex;
@@ -99,21 +115,26 @@ SEARCH SECTION
     justify-content: center;
     align-items: center;
     padding-top: 36px;
+    color: #054f79;
 }
 
 .search__title {
     margin-bottom: 24px;
+    width: 100%;
+    text-align: center;
+    max-width: 700px;
 }
 
-.fa-fire {
-    ;
+.search__description {
+    font-size: 28px;
+    margin: 24px;
 }
 
 .search__bar {
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     border-radius: 25px;
-    padding: 12px;
+    padding: 20px 20px;
     border: 2px solid var(--primary-color);
     display: flex;
 }
@@ -127,17 +148,17 @@ SEARCH SECTION
 
 .search__result {
     width: 100%;
-    max-width: 1000px;
+    
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 48px;
+    padding: 76px 0 ;
 }
 
-.search__filter {
+.price__filter {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
 }
 
