@@ -46,6 +46,11 @@ a {
     margin: 0 auto;
 }
 
+.landing-page {
+    height: 100vh;
+    overflow: hidden;
+}
+
 .btn {
     color: white;
     font-size:16px;
@@ -64,11 +69,22 @@ NAVIGATION
 
 */ 
 
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.website__name {
+    margin-right: -4px;
+    margin-bottom: 4px;
+    font-size: 32px;
+    color: #054f79;
+}
 
 .logo__img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50px;
 }
 
@@ -104,6 +120,11 @@ nav {
     background-color: #0e87cd;
 }
 
+.btn:hover {
+    transform: scale(1.02);
+}
+
+
 /* 
 
 SEARCH SECTION 
@@ -133,26 +154,20 @@ SEARCH SECTION
 
 
 
-.fa-glasses {
- animation: twist 4s infinite linear;
+.lens {
+    padding-top: 12px;
+    width: 44px;
+ animation: slide 1s infinite linear alternate-reverse;;
 }
 
-@keyframes twist {
-    0% {
-        transform: rotate(0deg);
+@keyframes slide {
+     from {
+        transform: translateX(10px);
     }
-    25% {
-        transform: rotate(15deg);
+    to {
+        transform: translateX(-10px);
     }
-    50% {
-        transform: rotate(0deg);
-    }
-    75% {
-        transform: rotate(-15deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
+    
 }
     
 
@@ -204,7 +219,9 @@ SEARCH SECTION
 }
 
 .search__result {
+    font-size: 24px;
     width: 100%;
+    max-width: 1000px;
     color: #054f79;
     margin: 0 auto;
     display: flex;
@@ -230,4 +247,58 @@ SEARCH SECTION
     height: 300px;
     margin: 0 auto;
 }
+
+/* 
+
+COIN PROJECTS
+
+
+*/
+
+.coin__img--wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.coin__img {
+    width: 100%;;
+    max-width: 80px;
+}
+
+  .coin__projects {
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .coin__row {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px;
+    font-size: 14px;
+  }
+
+  .coin__label {
+    font-weight: bold;
+    padding-right: 12px;
+  }
+
+  .coin {
+    border: 2px solid #054f79;
+    border-radius: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 24px;
+    padding: 8px;
+    flex: 0 1 calc(25% - 20px);
+    transition: all 300ms ease;
+  }
+
+  .coin:hover {
+    transform: scale(1.05);
+  }
 
