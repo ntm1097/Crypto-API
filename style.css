@@ -69,6 +69,32 @@ NAVIGATION
 
 */ 
 
+#rolling-coin {
+  position: absolute;
+  left: -100px;  
+  top: 80%;
+  width: 64px;
+  z-index: 1000;
+  transition: all 2s, transform 2.5s;
+}
+
+#rolling-coin.rolling {
+  left: 50%;
+  transform: translateX(-50%) rotate(720deg);
+}
+
+/* Coin jump animation */
+@keyframes coin-spin {
+  0%   { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+
+#rolling-coin.spinning {
+  animation: coin-spin infinite 2s linear;
+}
+
+
 .logo {
     display: flex;
     align-items: center;
@@ -165,18 +191,42 @@ SEARCH SECTION
 .lens {
     padding-top: 12px;
     width: 44px;
- animation: slide 1s infinite linear alternate-reverse;;
+ animation: slide 700ms infinite linear alternate-reverse;;
 }
 
 @keyframes slide {
      from {
-        transform: translateX(10px);
+        transform: translate(10px);
     }
     to {
-        transform: translateX(-10px);
+        transform: translate(-10px);
     }
     
 }
+
+/* Loading spinner */ 
+
+#loading-spinner {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.7);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+#loading-spinner .fa-spinner {
+  font-size: 64px;
+  animation: spin 1s linear infinite;
+  color: var(--primary-color);
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* Search bar */
 
 
 .search__description {
@@ -198,11 +248,14 @@ SEARCH SECTION
     border: 2px solid var(--primary-color);
     display: flex;
     transition: all 300ms ease;
+    box-shadow: var(--primary-color) 12px 12px 0px -6px;
 }
 
 .search__bar:hover {
     color: #0e87cd;
     border-color: #0e87cd;
+    transform: scale(1.02);
+    box-shadow: var(--primary-color) 16px 16px 0px -6px;
 }
 
 .search__bar:hover .fa-magnifying-glass {
@@ -294,6 +347,7 @@ COIN PROJECTS
   }
 
   .coin {
+    box-shadow: var(--primary-color) 20px 20px 0px -6px;
     border: 2px solid #054f79;
     border-radius: 65px;
     display: flex;
@@ -308,5 +362,6 @@ COIN PROJECTS
 
   .coin:hover {
     transform: scale(1.05);
+    box-shadow: var(--primary-color) 16px 16px 0px -6px;
   }
 

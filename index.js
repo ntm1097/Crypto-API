@@ -2,12 +2,120 @@ let allCoins = [];
 let filteredCoins = [];
 let selectedMaxPrice = 150000;
 
+document.addEventListener('DOMContentLoaded', () => {
+    const top6Link = document.getElementById('top6-link');
+    if (top6Link) {
+        top6Link.addEventListener('click', (e) => {
+            e.preventDefault();
+            filteredCoins = allCoins.slice(0, 6); // Assumes allCoins is sorted by market cap
+            displayCoins();
+        });
+    }
+});
+
+// Spinner creation (run once on page load)
+document.addEventListener('DOMContentLoaded', () => {
+    if (!document.getElementById('loading-spinner')) {
+        const spinner = document.createElement('div');
+        spinner.id = 'loading-spinner';
+        spinner.innerHTML = '<i class="fa-solid fa-spinner fa-spin"</i>';
+        document.body.appendChild(spinner);
+    }
+
+    fetchAllCoins();
+
+    // Price range filter
+    const priceRange = document.querySelector('.price__range');
+    const priceLabel = document.getElementById('price-range-label');
+    if (priceRange && priceLabel) {
+        priceRange.min = 0;
+        priceRange.max = 150000;
+        priceRange.value = 150000;
+
+        priceRange.addEventListener('input', (e) => {
+            const value = Number(e.target.value);
+            priceLabel.textContent = `Price range $0 to $${value.toLocaleString()}`;
+            filterByPrice(value);
+        });
+    }
+
+    // Search bar functionality (hide magnifier and search on Enter)
+    const searchInput = document.querySelector('.search__bar--text');
+    const magnifier = document.querySelector('.search__bar .fa-magnifying-glass');
+    if (searchInput && magnifier) {
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.length > 0) {
+                magnifier.style.display = 'none';
+            } else {
+                magnifier.style.display = '';
+            }
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                showSpinner();
+                setTimeout(() => {
+                    const query = searchInput.value.trim().toLowerCase();
+                    if (query === '') {
+                        filteredCoins = allCoins;
+                    } else {
+                        filteredCoins = allCoins.filter(coin =>
+                            coin.name.toLowerCase().includes(query) ||
+                            coin.symbol.toLowerCase().includes(query)
+                        );
+                    }
+                    displayCoins();
+                    hideSpinner();
+                }, 500); // Simulate loading for UX
+            }
+        });
+    }
+});
+
+function showSpinner() {
+    const spinner = document.getElementById('loading-spinner');
+    if (spinner) spinner.style.display = 'flex';
+}
+function hideSpinner() {
+    const spinner = document.getElementById('loading-spinner');
+    if (spinner) spinner.style.display = 'none';
+}
+
+function handleInitialSearch() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search');
+    const searchInput = document.querySelector('.search__bar--text');
+    if (searchInput && searchQuery) {
+        searchInput.value = searchQuery;
+        filteredCoins = allCoins.filter(coin =>
+            coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            coin.symbol.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    } else {
+        filteredCoins = allCoins;
+    }
+}
+
 async function fetchAllCoins() {
-    const response = await fetch('https://corsproxy.io/?https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false');
-    allCoins = await response.json();
-    filteredCoins = allCoins;
-    handleInitialSearch();
-    displayCoins();
+    showSpinner();
+    try {
+        const response = await fetch('https://corsproxy.io/?https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false');
+        const data = await response.json();
+        if (Array.isArray(data)) {
+            allCoins = data;
+        } else {
+            allCoins = [];
+            alert('Failed to load coins. Please try again later.');
+        }
+        filteredCoins = allCoins;
+        handleInitialSearch();
+        displayCoins();
+    } catch (err) {
+        allCoins = [];
+        filteredCoins = [];
+        alert('Network error. Please try again later.');
+    }
+    setTimeout(hideSpinner, 600);
 }
 
 function displayCoins() {
@@ -56,59 +164,3 @@ function filterByPrice(maxPrice) {
     filteredCoins = allCoins.filter(coin => coin.current_price <= maxPrice);
     displayCoins();
 }
-
-// Handle search from URL (for landing page redirect)
-function handleInitialSearch() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchQuery = urlParams.get('search');
-    const searchInput = document.querySelector('.search__bar--text');
-    if (searchInput && searchQuery) {
-        searchInput.value = searchQuery;
-        filteredCoins = allCoins.filter(coin =>
-            coin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            coin.symbol.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    } else {
-        filteredCoins = allCoins;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    fetchAllCoins();
-
-    // Price range filter
-    const priceRange = document.querySelector('.price__range');
-    const priceLabel = document.getElementById('price-range-label');
-    if (priceRange && priceLabel) {
-        priceRange.min = 0;
-        priceRange.max = 150000;
-        priceRange.value = 150000;
-
-        priceRange.addEventListener('input', (e) => {
-            const value = Number(e.target.value);
-            priceLabel.textContent = `Price range $0 to $${value.toLocaleString()}`;
-            filterByPrice(value);
-        });
-    }
-
-    // Search bar functionality (works for both direct and redirected search)
-    const searchInput = document.querySelector('.search__bar--text');
-     searchInput.addEventListener('keydown', (e) => {
-     if (e.key === 'Enter') {
-        showSpinner();
-        setTimeout(() => { // Simulate loading for UX
-            const query = searchInput.value.trim().toLowerCase();
-            if (query === '') {
-                filteredCoins = allCoins;
-            } else {
-                filteredCoins = allCoins.filter(coin =>
-                    coin.name.toLowerCase().includes(query) ||
-                    coin.symbol.toLowerCase().includes(query)
-                );
-            }
-            displayCoins();
-            hideSpinner();
-        }, 500); // 0.5s spinner for effect
-    }
-});
-});
