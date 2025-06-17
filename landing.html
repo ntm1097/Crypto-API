@@ -1,56 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="landing.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
     <link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-     />
-
-</head>
-<div class="nav__container">
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <div class="nav__container">
     <nav>
-        <figure class="logo">
-            <span class="website__name">CryptoLen</span>
-            <img src="./Assets/icons8-coin-64.png" class="logo__img" alt="">
-        </figure>
-        <ul class="nav__links">
-            <li class="nav__link hover__effect">
-                <a class="accent"  href="#">Home</a>
-            </li>
-            <li class="nav__link hover__effect">
-                <a class="accent" href="#">Top 10 marketcap</a>
-            </li>
-            <li class="nav__link hover__effect link__primary">
-                <button  class="btn" onclick=" window.location.href='pricing.html'">Research</button>
-            </li>
-        </ul>
+      <figure class="logo">
+        <a
+          class="accent"
+          href="landing.html"
+          style="display: flex; align-items: center; text-decoration: none"
+        >
+          <span class="website__name">CryptoLen</span>
+          <img src="./Assets/icons8-coin-64.png" class="logo__img" alt="" />
+        </a>
+      </figure>
+      <ul class="nav__links">
+        <li class="nav__link hover__effect">
+          <a class="accent" href="#">Home</a>
+        </li>
+        <li class="nav__link hover__effect">
+          <a class="accent" href="#">Top 10 marketcap</a>
+        </li>
+        <li class="nav__link hover__effect link__primary">
+          <button class="btn" onclick=" window.location.href='pricing.html'">
+            Research
+          </button>
+        </li>
+      </ul>
     </nav>
-</div>
-<body class="landing-page">
+  </div>
+  <body class="landing-page">
     <section id="landing__page">
-    <div class="container">
-                <div class="row">
-        <div class="search__wrapper">
-            <h1 class="search__title">Find The <span class="highlight"> Hottest</span> Coins On The Market <i class="fa-solid fa-fire highlight" ></i></h1>
-            <h3 class="search__description">Track with <span class="highlight">CryptoLens</span></h3>
+      <div class="container">
+        <div class="row">
+          <div class="search__wrapper">
+            <div class="loading-spinner">
+                <i class="fa-solid fa-spinner fa-spin" ></i>
+            </div>
+            <h1 class="search__title">
+              Find The <span class="highlight"> Hottest</span> Coins On The
+              Market <i class="fa-solid fa-fire highlight"></i>
+            </h1>
+            <h3 class="search__description">
+              Track with <span class="highlight">CryptoLens</span>
+            </h3>
             <div class="search__bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input class="search__bar--text" type="text" placeholder="Search for any coin">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                class="search__bar--text"
+                type="text"
+                placeholder="Search for any coin"
+              />
             </div>
             <figure>
-                <img class="currency__img" src="./Assets/undraw_crypto-portfolio_cat6.svg" alt="">
+              <img
+                class="currency__img"
+                src="./Assets/undraw_crypto-portfolio_cat6.svg"
+                alt=""
+              />
             </figure>
+          </div>
         </div>
-        <div class="search__result">
-            <div class="price__filter">
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-</body>
+      </div>
+    </section>
+  </body>
 </html>

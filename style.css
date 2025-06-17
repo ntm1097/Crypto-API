@@ -75,9 +75,14 @@ NAVIGATION
     justify-content: center;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
 .website__name {
     margin-right: -4px;
     margin-bottom: 4px;
+    font-weight: bold;;
     font-size: 32px;
     color: #054f79;
 }
@@ -125,6 +130,9 @@ nav {
 }
 
 
+
+
+
 /* 
 
 SEARCH SECTION 
@@ -169,7 +177,7 @@ SEARCH SECTION
     }
     
 }
-    
+
 
 .search__description {
     font-size: 28px;
