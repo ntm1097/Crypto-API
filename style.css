@@ -139,9 +139,28 @@ nav {
     display: flex;
 }
 
+.hover-effect::after {
+    content: "";
+    position: absolute;
+    overflow: hidden;
+    height: 3px;
+    right: 0px;
+    background-color: #054f79;
+    width: 0%;
+    bottom: 6px;
+    transition: width 0.3s ease-in-out;
+}
+
+.hover-effect:hover:after {
+    width: 100%;
+    left: 0px;
+    transition: width 0.3s ease-in-out;
+}
+
 
 .nav__link {
-    padding-left: 24px;
+    position: relative;
+    margin-left: 24px;
     display: flex;
     align-items: center;
     font-size: 18px;
@@ -191,7 +210,7 @@ SEARCH SECTION
 .lens {
     padding-top: 12px;
     width: 44px;
- animation: slide 700ms infinite linear alternate-reverse;;
+ animation: slide 2s infinite linear alternate-reverse;;
 }
 
 @keyframes slide {
@@ -346,6 +365,10 @@ COIN PROJECTS
     padding-right: 12px;
   }
 
+  .coin__info {
+    margin: 12px;
+  }
+
   .coin {
     box-shadow: var(--primary-color) 20px 20px 0px -6px;
     border: 2px solid #054f79;
@@ -365,3 +388,84 @@ COIN PROJECTS
     box-shadow: var(--primary-color) 16px 16px 0px -6px;
   }
 
+/* Small phones and tablets */ 
+
+@media (max-width:780px) {
+.search__title {
+    font-size: 36px;
+}
+.search__result {
+    font-size: 20px;
+}
+.search__bar {
+    width: 100%;
+    max-width:500px;
+}
+.coin {
+    
+}
+.coin__info {
+    padding: 12px;
+}
+.pricing-page .search__title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+
+@media (max-width: 550px) {
+    .coin__row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .coin {
+        width: 100%;
+        flex: 0 1 calc(100% - 20px);
+    }
+    .coin__infor{
+        text-align: center;
+    }
+
+    .search__description {
+        font-size: 20px;
+    }
+
+    .pricing-page .search__title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .search__title {
+        font-size: 36px;
+        width: 100%;
+        max-width: 300px;
+    }
+    .nav__link {
+        display: none;
+    }
+    nav {
+        position: relative;
+        height: 60px;
+        display: block;
+    }
+    .nav__logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% -50%);
+    }
+    .search__description {
+        text-align: center;
+    }
+
+    .search__result {
+        font-size: 16px;
+    }
+    
+}
